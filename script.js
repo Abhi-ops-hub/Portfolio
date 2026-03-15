@@ -290,28 +290,77 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================= */
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
+    const toast = document.getElementById('toast');
 
-    contactForm.addEventListener('submit', (e) => {
+    // Email validation RegEx
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData.entries());
+
+        // Custom Email Validation
+        if (data.email) data.email = data.email.trim();
+        if (!emailRegex.test(data.email)) {
+            formStatus.textContent = "please provide a valid email address";
+            formStatus.className = 'form-status error';
+            formStatus.style.display = 'block';
+            return; // Stop form submission
+        }
 
         // Disable button during "sending"
         const btn = contactForm.querySelector('.submit-btn');
         const originalText = btn.innerHTML;
         btn.innerHTML = '<span>Transmitting...</span> <i class="fas fa-spinner fa-spin"></i>';
         btn.disabled = true;
+        
+        // Add FormSubmit specific configurations programmatically
+        data._captcha = "false"; 
+        data._template = "table"; 
+        // Make the email subject unique so Gmail doesn't group or block them as spam
+        data._subject = `Portfolio Message from ${data.name || 'User'} - ${data.subject || 'Contact'}`;
 
-        // Simulate sending for effect
-        setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
+        try {
+            // Setup a timeout so the "lagging" doesn't freeze the page forever
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s wait maximum
 
-            formStatus.textContent = "Transmission successful! I will get back to you shortly.";
-            formStatus.className = 'form-status success';
-            contactForm.reset();
+            const response = await fetch("https://formsubmit.co/ajax/abhi.pvt2523@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data),
+                signal: controller.signal
+            });
+            
+            clearTimeout(timeoutId);
 
-            setTimeout(() => {
+            if (response.ok) {
+                // Show toast for 2 seconds
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+                
+                contactForm.reset();
                 formStatus.style.display = 'none';
-            }, 5000);
-        }, 1500);
+            } else {
+                throw new Error('Server returned an error');
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            formStatus.textContent = error.name === 'AbortError' 
+                ? 'Transmission timed out. Please try again.' 
+                : 'Transmission failed. Please check connection and try again.';
+            formStatus.className = 'form-status error';
+            formStatus.style.display = 'block';
+        }
+
+        btn.innerHTML = originalText;
+        btn.disabled = false;
     });
 });

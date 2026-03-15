@@ -391,7 +391,13 @@
                         <div class="input-line"></div>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="subject" name="subject" required placeholder=" " autocomplete="off">
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected hidden></option>
+                            <option value="Internship">Internship</option>
+                            <option value="Collaboration">Collaboration</option>
+                            <option value="Discussion">Discussion</option>
+                            <option value="Just saying hi">Just saying hi</option>
+                        </select>
                         <label for="subject">Subject</label>
                         <div class="input-line"></div>
                     </div>
@@ -424,6 +430,9 @@
             <p class="copyright">&copy; <span id="year"></span> Abhi Ops. Engineered for the future.</p>
         </div>
     </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Message sent</div>
 
     <script src="script.js"></script>
 </body>
