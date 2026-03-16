@@ -33,8 +33,9 @@
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#vision">Vision</a></li>
+                <li><a href="#selected-projects">Selected Work</a></li>
+                <li><a href="#projects">GitHub</a></li>
+                <li><a href="#vision">Upcoming</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -48,8 +49,9 @@
         <ul class="mobile-nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#vision">Vision</a></li>
+            <li><a href="#selected-projects">Selected Work</a></li>
+            <li><a href="#projects">GitHub</a></li>
+            <li><a href="#vision">Upcoming</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </div>
@@ -124,7 +126,18 @@
                     <div class="about-icon-display">
                         <div class="ring outer"></div>
                         <div class="ring inner"></div>
-                        <i class="fas fa-user-astronaut profile-icon"></i>
+                        <div class="photo-slider">
+                            <img src="portfolio%20photos/1.JPG" alt="Profile Photo 1" class="slider-img active">
+                            <img src="portfolio%20photos/2.png" alt="Profile Photo 2" class="slider-img">
+                            <img src="portfolio%20photos/3.jpeg" alt="Profile Photo 3" class="slider-img">
+                            <img src="portfolio%20photos/5.jpeg" alt="Profile Photo 5" class="slider-img">
+                            <img src="portfolio%20photos/6.webp" alt="Profile Photo 6" class="slider-img">
+                            <img src="portfolio%20photos/7.JPG" alt="Profile Photo 7" class="slider-img">
+                            <img src="portfolio%20photos/8.jpeg" alt="Profile Photo 8" class="slider-img">
+                            <img src="portfolio%20photos/9.jpg" alt="Profile Photo 9" class="slider-img">
+                            <img src="portfolio%20photos/10.jpeg" alt="Profile Photo 10" class="slider-img">
+                            <img src="portfolio%20photos/11.jpg" alt="Profile Photo 11" class="slider-img">
+                        </div>
                     </div>
                 </div>
                 <div class="about-text glass-panel" data-aos="fade-left" data-aos-delay="200">
@@ -296,10 +309,74 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="projects-section">
+        <!-- Selected Projects Section -->
+        <section id="selected-projects" class="projects-section">
             <div class="container section-header" data-aos="fade-right">
-                <h2 class="section-title">03. Project Modules</h2>
+                <h2 class="section-title">03. Selected Works</h2>
+                <div class="section-line"></div>
+            </div>
+            
+            <div class="container">
+                <div class="projects-grid">
+                    <!-- Project 1: Netflix -->
+                    <div class="project-card glass-panel" data-aos="fade-up">
+                        <div class="project-header">
+                            <i class="far fa-folder-open fa-2x" style="color: var(--accent-neon);"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/Abhi-ops-hub/Netflix-Data-Analysis" target="_blank" title="GitHub Repo"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Netflix Visualization</h3>
+                        <p class="project-desc">Comprehensive data analysis and visualization of Netflix's content library, revealing trends in genres, global expansion, and viewer preferences over time.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Matplotlib</span>
+                            <span class="tech-tag">Seaborn</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Amazon Sales -->
+                    <div class="project-card glass-panel" data-aos="fade-up" data-aos-delay="100">
+                        <div class="project-header">
+                            <i class="far fa-folder-open fa-2x" style="color: var(--accent-neon);"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/Abhi-ops-hub/Amazon-Sale-Report-Data-Analysis" target="_blank" title="GitHub Repo"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Amazon Sales Analysis</h3>
+                        <p class="project-desc">In-depth exploratory data analysis on a massive Amazon sales dataset to derive actionable business insights regarding product performance, seasonal patterns, and revenue generation.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Data Visualization</span>
+                            <span class="tech-tag">NumPy</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: EV -->
+                    <div class="project-card glass-panel" data-aos="fade-up" data-aos-delay="200">
+                        <div class="project-header">
+                            <i class="far fa-folder-open fa-2x" style="color: var(--accent-neon);"></i>
+                            <div class="project-links">
+                                <a href="https://github.com/Abhi-ops-hub/Global-EV-Sales" target="_blank" title="GitHub Repo"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Global EV Sales Analytics</h3>
+                        <p class="project-desc">A deep dive into the rapid growth of the electric vehicle market, modeling global sales traction, regional adoption rates, and future market predictions.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Predictive Analytics</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GitHub API Projects Section -->
+        <section id="projects" class="projects-section" style="padding-top: 0;">
+            <div class="container section-header" data-aos="fade-right">
+                <h2 class="section-title">04. GitHub Archive</h2>
                 <div class="section-line"></div>
             </div>
             <p class="container sync-text" data-aos="fade-up"><i class="fas fa-sync fa-spin"></i> Live sync from GitHub
@@ -316,10 +393,10 @@
             </div>
         </section>
 
-        <!-- Future Vision Section -->
+        <!-- Upcoming Projects Section -->
         <section id="vision" class="vision-section">
             <div class="container section-header" data-aos="fade-right">
-                <h2 class="section-title">04. Future Vision &amp; Upcoming Projects</h2>
+                <h2 class="section-title">05. Upcoming Projects</h2>
                 <div class="section-line"></div>
             </div>
             <div class="container vision-grid">
@@ -356,7 +433,7 @@
         <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="container section-header" data-aos="fade-right">
-                <h2 class="section-title">05. Initiate Contact</h2>
+                <h2 class="section-title">06. Initiate Contact</h2>
                 <div class="section-line"></div>
             </div>
             <div class="container contact-container">
@@ -392,14 +469,15 @@
                         <div class="input-line"></div>
                     </div>
                     <div class="form-group custom-dropdown-group" id="subjectGroup">
-                        <select id="subject" name="subject" required class="hidden-select" style="opacity: 0; position: absolute; width: 0; height: 0; z-index: -1; bottom: 0; left: 0;">
+                        <select id="subject" name="subject" required class="hidden-select"
+                            style="opacity: 0; position: absolute; width: 0; height: 0; z-index: -1; bottom: 0; left: 0;">
                             <option value="" disabled selected hidden></option>
                             <option value="Internship">Internship</option>
                             <option value="Collaboration">Collaboration</option>
                             <option value="Discussion">Discussion</option>
                             <option value="Just saying hi">Just saying hi</option>
                         </select>
-                        
+
                         <div class="custom-select-ui" tabindex="0">
                             <div class="select-trigger">
                                 <span class="selected-text" data-default=" "></span>

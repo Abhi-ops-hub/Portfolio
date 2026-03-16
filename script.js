@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function typeHeroText() {
                 const currentPhrase = phrases[phraseIndex];
-                
+
                 if (isDeleting) {
                     typeWriterEl.textContent = currentPhrase.substring(0, charIndex - 1);
                     charIndex--;
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 setTimeout(typeHeroText, typeSpeed);
             }
-            
+
             setTimeout(typeHeroText, 500);
         }
     }
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchGithubProjects() {
         try {
             // Fetch public repositories sorted by recently updated
-            const response = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=14`);
+            const response = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=3`);
 
             if (!response.ok) {
                 throw new Error('Failed to fetch repositories');
@@ -305,23 +305,23 @@ document.addEventListener('DOMContentLoaded', () => {
         selectOptions.forEach(option => {
             option.addEventListener('click', (e) => {
                 e.stopPropagation();
-                
+
                 // Remove selected class from all
                 selectOptions.forEach(opt => opt.classList.remove('selected'));
-                
+
                 // Add selected class to clicked
                 option.classList.add('selected');
-                
+
                 // Update text and value
                 const value = option.getAttribute('data-value');
                 const text = option.querySelector('span').innerText;
-                
+
                 selectedText.innerText = text;
                 hiddenSelect.value = value;
-                
+
                 customSelectUi.classList.remove('open');
                 customSelectUi.classList.add('has-value');
-                
+
                 // Trigger change event for native select just in case
                 hiddenSelect.dispatchEvent(new Event('change'));
             });
@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 customSelectUi.classList.remove('open');
             }
         });
-        
+
         // Handle keyboard navigation (basic)
         customSelectUi.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -375,10 +375,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const originalText = btn.innerHTML;
         btn.innerHTML = '<span>Transmitting...</span> <i class="fas fa-spinner fa-spin"></i>';
         btn.disabled = true;
-        
+
         // Add FormSubmit specific configurations programmatically
-        data._captcha = "false"; 
-        data._template = "table"; 
+        data._captcha = "false";
+        data._template = "table";
         // Make the email subject unique so Gmail doesn't group or block them as spam
         data._subject = `Portfolio Message from ${data.name || 'User'} - ${data.subject || 'Contact'}`;
 
@@ -389,14 +389,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const response = await fetch("https://formsubmit.co/ajax/abhi.pvt2523@gmail.com", {
                 method: "POST",
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify(data),
                 signal: controller.signal
             });
-            
+
             clearTimeout(timeoutId);
 
             if (response.ok) {
@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     toast.classList.remove('show');
                 }, 2000);
-                
+
                 contactForm.reset();
                 formStatus.style.display = 'none';
             } else {
@@ -413,14 +413,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Error submitting form:', error);
-            formStatus.textContent = error.name === 'AbortError' 
-                ? 'Transmission timed out. Please try again.' 
+            formStatus.textContent = error.name === 'AbortError'
+                ? 'Transmission timed out. Please try again.'
                 : 'Transmission failed. Please check connection and try again.';
             formStatus.className = 'form-status error';
             formStatus.style.display = 'block';
         }
 
         btn.innerHTML = originalText;
-        btn.disabled = false;
     });
+
+    /* =========================================
+       ABOUT SECTION PHOTO SLIDER
+       ========================================= */
+    const slides = document.querySelectorAll('.slider-img');
+    if (slides.length > 0) {
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 1000);
+    }
 });
