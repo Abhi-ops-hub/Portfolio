@@ -36,6 +36,24 @@ html {
     font-size: 16px;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 240, 255, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-neon);
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
@@ -131,6 +149,10 @@ h1 {
     line-height: 1.1;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
+    background: linear-gradient(90deg, #ffffff, var(--accent-neon));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 h2 {
@@ -165,9 +187,13 @@ section {
 }
 
 .section-title {
-    color: var(--text-main);
     display: flex;
     align-items: center;
+    background: linear-gradient(90deg, #ffffff, var(--accent-neon));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
 }
 
 .section-line {
@@ -185,11 +211,13 @@ section {
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
 }
 
 .glass-panel:hover {
     border-color: rgba(0, 240, 255, 0.3);
-    box-shadow: var(--glow-shadow);
+    box-shadow: 0 10px 40px rgba(0, 240, 255, 0.2);
     transform: translateY(-5px);
 }
 
@@ -210,6 +238,10 @@ section {
     overflow: hidden;
     transition: var(--transition-normal);
     border: 1px solid transparent;
+}
+
+.btn:active {
+    transform: scale(0.95);
 }
 
 .btn-primary {
@@ -661,20 +693,20 @@ nav.scrolled {
 }
 
 .ring.outer {
-    width: 250px;
-    height: 250px;
+    width: clamp(200px, 25vw, 350px);
+    height: clamp(200px, 25vw, 350px);
     animation: spin 20s linear infinite;
 }
 
 .ring.inner {
-    width: 180px;
-    height: 180px;
+    width: clamp(140px, 20vw, 280px);
+    height: clamp(140px, 20vw, 280px);
     border-color: var(--accent-auto);
     animation: spinReverse 15s linear infinite;
 }
 
 .profile-icon {
-    font-size: 5rem;
+    font-size: clamp(4rem, 6vw, 7rem);
     color: var(--text-main);
     z-index: 2;
 }
@@ -806,6 +838,38 @@ nav.scrolled {
     /* Animated via JS */
     transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1);
     box-shadow: 0 0 10px var(--accent-neon);
+    position: relative;
+    overflow: hidden;
+}
+
+.progress::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(45deg,
+            rgba(255, 255, 255, 0.15) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.15) 50%,
+            rgba(255, 255, 255, 0.15) 75%,
+            transparent 75%,
+            transparent);
+    background-size: 1rem 1rem;
+    animation: moveStripes 1s linear infinite;
+    z-index: 1;
+}
+
+@keyframes moveStripes {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 1rem 0;
+    }
 }
 
 /* =========================================
@@ -1145,6 +1209,128 @@ nav.scrolled {
 .form-status.error {
     display: block;
     color: var(--accent-auto);
+}
+
+/* Custom Select UI */
+.custom-dropdown-group {
+    position: relative;
+}
+
+.custom-select-ui {
+    position: relative;
+    width: 100%;
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-glass);
+    transition: var(--transition-fast);
+}
+
+.custom-select-ui:focus, .custom-select-ui.open {
+    border-bottom-color: var(--accent-neon);
+}
+
+.custom-select-ui .select-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    color: var(--text-muted);
+    transition: var(--transition-fast);
+}
+
+.custom-select-ui.has-value .select-trigger {
+    color: var(--text-main);
+}
+
+.custom-select-ui.open .select-trigger .select-icon {
+    transform: rotate(180deg);
+    color: var(--accent-neon);
+}
+
+.custom-select-ui .select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(15, 15, 21, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 8px;
+    margin-top: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 100;
+    overflow: hidden;
+}
+
+.custom-select-ui.open .select-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.select-option {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: var(--transition-fast);
+}
+
+.select-option i {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+    transition: var(--transition-fast);
+}
+
+.select-option:hover {
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--accent-neon);
+}
+
+.select-option:hover i {
+    color: var(--accent-neon);
+}
+
+.select-option.selected {
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--accent-neon);
+    border-left: 3px solid var(--accent-neon);
+}
+
+.select-option.selected i {
+    color: var(--accent-neon);
+}
+
+.custom-label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.custom-select-ui.open ~ .custom-label,
+.custom-select-ui.has-value ~ .custom-label,
+.custom-select-ui:focus ~ .custom-label {
+    top: -20px;
+    font-size: 0.8rem;
+    color: var(--accent-neon);
+}
+
+.custom-select-ui:focus ~ .input-line,
+.custom-select-ui.open ~ .input-line {
+    width: 100%;
 }
 
 /* =========================================

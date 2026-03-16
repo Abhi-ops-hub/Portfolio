@@ -286,6 +286,66 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================================
+       CUSTOM DROPDOWN LOGIC
+       ========================================= */
+    const customSelectUi = document.querySelector('.custom-select-ui');
+    const selectTrigger = document.querySelector('.select-trigger');
+    const selectOptions = document.querySelectorAll('.select-option');
+    const hiddenSelect = document.getElementById('subject');
+    const selectedText = document.querySelector('.selected-text');
+
+    if (customSelectUi && hiddenSelect) {
+        // Toggle dropdown
+        selectTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSelectUi.classList.toggle('open');
+        });
+
+        // Handle option selection
+        selectOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // Remove selected class from all
+                selectOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked
+                option.classList.add('selected');
+                
+                // Update text and value
+                const value = option.getAttribute('data-value');
+                const text = option.querySelector('span').innerText;
+                
+                selectedText.innerText = text;
+                hiddenSelect.value = value;
+                
+                customSelectUi.classList.remove('open');
+                customSelectUi.classList.add('has-value');
+                
+                // Trigger change event for native select just in case
+                hiddenSelect.dispatchEvent(new Event('change'));
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!customSelectUi.contains(e.target)) {
+                customSelectUi.classList.remove('open');
+            }
+        });
+        
+        // Handle keyboard navigation (basic)
+        customSelectUi.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                customSelectUi.classList.toggle('open');
+            } else if (e.key === 'Escape') {
+                customSelectUi.classList.remove('open');
+            }
+        });
+    }
+
+    /* =========================================
        CONTACT FORM SUBMIT
        ========================================= */
     const contactForm = document.getElementById('contactForm');
