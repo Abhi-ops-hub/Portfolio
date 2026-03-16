@@ -347,22 +347,26 @@ nav.scrolled {
 }
 
 .mobile-menu {
-    display: none;
+    display: flex;
+    visibility: hidden;
     position: fixed;
     inset: 0;
-    background: rgba(5, 5, 8, 0.95);
+    background: rgba(5, 5, 8, 0.98);
     z-index: 999;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     opacity: 0;
+    transform: translateY(-100%);
     pointer-events: none;
-    transition: 0.3s;
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .mobile-menu.active {
+    visibility: visible;
     opacity: 1;
+    transform: translateY(0);
     pointer-events: all;
 }
 
@@ -373,7 +377,22 @@ nav.scrolled {
 
 .mobile-nav-links li {
     margin: 2rem 0;
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 }
+
+.mobile-menu.active .mobile-nav-links li {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.mobile-menu.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(5) { transition-delay: 0.3s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(6) { transition-delay: 0.35s; }
 
 .mobile-nav-links a {
     font-family: var(--font-heading);
@@ -381,6 +400,29 @@ nav.scrolled {
     color: var(--text-main);
     text-decoration: none;
     text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.mobile-nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--accent-neon);
+    transition: width 0.3s ease;
+}
+
+.mobile-nav-links a:hover {
+    color: var(--accent-neon);
+}
+
+.mobile-nav-links a:hover::after {
+    width: 100%;
 }
 
 /* =========================================
