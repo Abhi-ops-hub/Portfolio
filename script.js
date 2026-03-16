@@ -416,6 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 contactForm.reset();
                 formStatus.style.display = 'none';
                 messageSent = true;
+                contactForm.setAttribute('novalidate', true);
             } else {
                 throw new Error('Server returned an error');
             }
