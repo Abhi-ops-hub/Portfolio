@@ -60,6 +60,7 @@ body {
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
 }
 
 .bg-elements {
@@ -171,7 +172,8 @@ h3 {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
+    width: 100%;
 }
 
 section {
@@ -574,6 +576,7 @@ nav.scrolled {
 }
 
 .terminal-window {
+    width: 100%;
     max-width: 800px;
     margin: 0 auto;
     background: rgba(10, 10, 15, 0.85);
@@ -1469,6 +1472,10 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+
     .nav-links {
         display: none;
     }
@@ -1477,23 +1484,79 @@ footer {
         display: block;
     }
 
-    .vision-container {
-        padding: 3rem 1.5rem;
+    .vision-grid {
+        gap: 1.5rem;
     }
 
-
     h1 {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 8vw, 2.5rem);
     }
 
     h2 {
-        font-size: 1.8rem;
+        font-size: clamp(1.5rem, 6vw, 1.8rem);
     }
 
     .contact-info,
     .contact-form,
+    .vision-card,
+    .project-card,
     .about-text {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .about-text p {
+        font-size: 0.95rem;
+    }
+
+    section {
+        padding: 4rem 0;
+    }
+
+    .section-header {
+        margin-bottom: 2rem;
+    }
+
+    .ring.outer {
+        width: clamp(200px, 70vw, 280px);
+        height: clamp(200px, 70vw, 280px);
+    }
+
+    .ring.inner {
+        width: clamp(180px, 65vw, 260px);
+        height: clamp(180px, 65vw, 260px);
+    }
+
+    .photo-slider {
+        width: clamp(170px, 60vw, 250px);
+        height: clamp(170px, 60vw, 250px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .btn {
+        width: 100%;
+        padding: 0.8rem 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .terminal-body {
+        font-size: 0.75rem;
+        padding: 10px;
+        min-height: 200px;
+    }
+
+    .terminal-title {
+        font-size: 0.75rem;
+        margin-right: 36px;
+    }
+    
+    .social-icon {
+        width: 40px;
+        height: 40px;
     }
 }
 
