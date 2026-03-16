@@ -355,8 +355,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Email validation RegEx
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+    let messageSent = false;
+
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        if (messageSent) {
+            alert("message already sent, refresh to send new");
+            return;
+        }
 
         const formData = new FormData(contactForm);
         const data = Object.fromEntries(formData.entries());
@@ -408,6 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 contactForm.reset();
                 formStatus.style.display = 'none';
+                messageSent = true;
             } else {
                 throw new Error('Server returned an error');
             }
@@ -421,6 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         btn.innerHTML = originalText;
+        btn.disabled = false;
     });
 
     /* =========================================
